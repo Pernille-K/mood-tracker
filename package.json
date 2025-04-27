@@ -1,0 +1,16 @@
+{
+	"name": "mood-tracker",
+	"private": true,
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+		"server": "cd backend && npm run dev",
+		"client": "cd frontend && npm run dev"
+	},
+	"devDependencies": {
+		"concurrently": "^9.1.2"
+	},
+	"dependencies": {
+		"mood-tracker": "file:"
+	}
+}
