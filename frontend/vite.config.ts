@@ -4,7 +4,11 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
+	plugins: [
+		react(),
+		VitePWA({
 			registerType: "autoUpdate",
+			injectRegister: "auto",
 			includeAssets: [
 				"favicon-assets/favicon.ico", 
 				"favicon-assets/apple-touch-icon.png",
@@ -49,6 +53,8 @@ export default defineConfig({
 				theme_color: "#ff91d4",
 				description: "An app to track mood and corrolated things to your mood to show stats!",
 			},
+		}),
+	],
 	server: {
 		proxy: {
 			"/api": "http://localhost:3000/",
