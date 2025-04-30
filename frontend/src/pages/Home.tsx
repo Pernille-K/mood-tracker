@@ -1,23 +1,30 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../styles/Home.css";
+import styles from "../styles/Home.module.scss";
 
 const Home = () => {
+	useEffect(() => {
+		document.body.style.backgroundColor = "#FF8bbd";
+		return () => {
+			document.body.style.backgroundColor = "";
+		};
+	}, []);
 	return (
-		<div className="container">
-			<h1>
+		<div className={styles.home_container}>
+			<h1 className={styles.home_h1}>
 				<img src="/favicon-assets/pwa-512x512.png"></img> Moodtracker
 			</h1>
-			<div className="gridButtons">
+			<div className={styles.home_gridBtns}>
 				<Link
-					className="button"
 					to="/register"
+					className={styles.home_btn}
 				>
 					{" "}
 					Register Mood{" "}
 				</Link>
 				<Link
-					className="button"
 					to="/stats"
+					className={styles.home_btn}
 				>
 					{" "}
 					Show stats{" "}

@@ -1,0 +1,51 @@
+@use "../styles/variables" as *;
+
+.home_container {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+	margin-top: 30vh;
+}
+
+.home_h1 {
+	font-size: 3.5rem;
+	font-weight: 800;
+	color: $color-1-secondary;
+	text-shadow: 3px 3px 5px #270017;
+}
+
+img {
+	padding: 0;
+	margin: 0;
+	height: 3rem;
+}
+
+.home_gridBtns {
+	display: flex;
+	flex-direction: row;
+	gap: 7vw;
+	margin: 0 auto;
+	justify-content: center;
+}
+
+.home_btn {
+	font-size: 1.2rem;
+	margin-top: 5vh;
+	display: inline-block;
+	background-color: $color-icon;
+	color: $color-icon-secondary;
+	border-radius: 15px;
+	border: none;
+	width: max-content;
+	padding: 3vh 2vh;
+	box-shadow: 3px 3px 5px #370221a0;
+	text-shadow: 2px 2px 3px #a9821fa0;
+	font-weight: 800;
+}
+
+.home_btn:hover {
+	background-color: $color-1-secondary;
+	color: $color-icon;
+	text-shadow: 2px 2px 3px #370221;
+}
