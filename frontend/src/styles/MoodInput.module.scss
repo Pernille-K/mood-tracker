@@ -1,0 +1,22 @@
+@use "../styles/variables" as *;
+
+.moodinput_label {
+	color: $color-2-secondary;
+	font-size: 1.5rem;
+	padding-right: 0.5rem;
+	font-weight: 600;
+}
+
+.moodinput_input {
+	width: 30vw;
+	height: 1.5rem;
+	font-size: 1.1rem;
+	background-color: #eed7ff;
+	color: $color-2-secondary;
+	border-radius: 10px;
+	margin: 0 auto;
+	border: none;
+	font-style: cursive;
+	padding-left: 0.5rem;
+	margin-right: 0.5rem;
+}
