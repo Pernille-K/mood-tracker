@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
+import styles from "../styles/MoodSelector.module.scss";
 
-function MoodSelector({ onMoodChange }: { onMoodChange: (selectedMood: string) => void }) {
+type MoodSelectorProps = {
+	mood: string;
+	setMood: (value: string) => void;
+	onMoodChange: (value: string) => void;
+};
+
+function MoodSelector({ mood, setMood, onMoodChange }: MoodSelectorProps) {
 	const [moods, setMoods] = useState<{ id: number; mood: string }[]>([]);
 
 	useEffect(() => {
 		const fetchMoods = async () => {
-			const response = await fetch("/api/moods");
+			const response = await fetch("/api/last-moods");
 			const data = await response.json();
 			setMoods(data);
 		};
@@ -13,20 +20,26 @@ function MoodSelector({ onMoodChange }: { onMoodChange: (selectedMood: string) =
 		fetchMoods();
 	}, []);
 
+	const handleClick = (mood: string) => {
+		setMood(mood);
+		onMoodChange(mood);
+	};
+
 	return (
-		<div>
-			<h3>Select Mood:</h3>
-			<select onChange={(e) => onMoodChange(e.target.value)}>
-				<option value="">--Choose a mood--</option>
-				{moods.map((mood) => (
-					<option
-						key={mood.id}
-						value={mood.mood}
-					>
-						{mood.mood}
-					</option>
-				))}
-			</select>
+		<div className={styles.moodselector_gridBtns}>
+			{moods.map((lastMood) => (
+				<button
+					key={lastMood.id}
+					onClick={() => handleClick(lastMood.mood)}
+					className={
+						mood === lastMood.mood
+							? `${styles.moodselector_btn} ${styles.moodselector_btn_selected}`
+							: styles.moodselector_btn
+					}
+				>
+					{lastMood.mood}
+				</button>
+			))}
 		</div>
 	);
 }
