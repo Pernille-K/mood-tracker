@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import MoodSelector from "../../components/MoodSelector";
 import MoodInput from "../../components/MoodInput";
 import styles from "../../styles/RegisterMood.module.scss";
@@ -28,7 +27,10 @@ function MoodPage() {
 
 	return (
 		<div className={styles.register_container}>
-			<h1 className={styles.register_h1}>
+			<h1
+				className={styles.register_h1}
+				onClick={() => navigate("/")}
+			>
 				<img src="/favicon-assets/pwa-512x512.png"></img>Register mood
 			</h1>{" "}
 			<h2 className={styles.register_h2}>How u feelin'</h2>

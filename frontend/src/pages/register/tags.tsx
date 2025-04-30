@@ -85,42 +85,52 @@ function TagPage() {
 
 	return (
 		<div className={styles.register_container}>
-			<h1 className={styles.register_h1}>
+			<h1
+				className={styles.register_h1}
+				onClick={() => navigate("/")}
+			>
 				<img src="/favicon-assets/pwa-512x512.png"></img>Register tag
 			</h1>{" "}
-			<h2 className={styles.register_h2}>What u doin'</h2>
-			<TagSelector
-				onTagToggle={(tag) => {
-					if (selectedTags.includes(tag)) removeTag(tag);
-					else addTag(tag);
-				}}
-				selectedTags={selectedTags}
-				availableTags={availableTags}
-			/>
-			<TagForm
-				tag={tag}
-				onAddTag={(newTag) => {
-					addTag(newTag);
-					setTag("");
-				}}
-			/>
-			<h3 className={styles.register_h3}>
-				<strong style={{ fontWeight: "600" }}>Selected mood:</strong> {mood}
-			</h3>
-			<button
-				className={styles.register_btn}
-				onClick={handleSave}
-			>
-				Save mood & tags
-			</button>
-			<p className={styles.register_p}>{message}</p>
-			{hasSaved && (
-				<button
-					className={styles.register_btn}
-					onClick={() => navigate("/register/mood")}
-				>
-					New mood
-				</button>
+			{hasSaved ? (
+				<>
+					<p className={styles.register_p}>{message}</p>
+
+					<button
+						className={styles.register_btn}
+						onClick={() => navigate("/register/mood")}
+					>
+						New mood
+					</button>
+				</>
+			) : (
+				<>
+					<h2 className={styles.register_h2}>What u doin'</h2>
+					<TagSelector
+						onTagToggle={(tag) => {
+							if (selectedTags.includes(tag)) removeTag(tag);
+							else addTag(tag);
+						}}
+						selectedTags={selectedTags}
+						availableTags={availableTags}
+					/>
+					<TagForm
+						tag={tag}
+						onAddTag={(newTag) => {
+							addTag(newTag);
+							setTag("");
+						}}
+					/>
+					<h3 className={styles.register_h3}>
+						<strong style={{ fontWeight: "600" }}>Selected mood:</strong> {mood}
+					</h3>
+					<button
+						className={styles.register_btn}
+						onClick={handleSave}
+					>
+						Save mood & tags
+					</button>
+					<p className={styles.register_p}>{message}</p>
+				</>
 			)}
 		</div>
 	);

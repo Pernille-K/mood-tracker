@@ -16,7 +16,7 @@ const Home = () => {
 			</h1>
 			<div className={styles.home_gridBtns}>
 				<Link
-					to="/register"
+					to="/register/mood"
 					className={styles.home_btn}
 				>
 					{" "}
