@@ -1,0 +1,50 @@
+@use "../styles/variables" as *;
+
+.tagselector_gridBtns {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 2vw;
+	margin: 5vh auto;
+	justify-content: center;
+	max-width: 70vw;
+
+	@media (max-width: 1000px) {
+		grid-template-columns: repeat(3, 1fr);
+		max-width: 80vw;
+	}
+
+	@media (max-width: 600px) {
+		grid-template-columns: repeat(2, 1fr);
+		max-width: 90vw;
+	}
+}
+
+.tagselector_btn {
+	background-color: $color-icon;
+	color: $color-icon-secondary;
+	box-shadow: 3px 3px 5px #2d023742;
+	display: inline-block;
+	border-radius: 15px;
+	border: none;
+	width: 12vw;
+	padding: 2vh 1vw;
+	font-weight: 800;
+	margin: 0 auto;
+	font-size: 1.2rem;
+
+	@media (max-width: 1000px) {
+		width: 25vw;
+	}
+
+	@media (max-width: 600px) {
+		width: 40vw;
+	}
+}
+
+.tagselector_btn:hover,
+.tagselector_btn_selected {
+	background-color: $color-2-secondary;
+	color: $color-icon;
+	text-shadow: 2px 2px 3px #38015079;
+	box-shadow: 3px 3px 5px #24003d62;
+}
