@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-// import RegisterMood from "./pages/RegisterMood";
+import RegisterMood from "./pages/RegisterMood";
 // import ShowStats from "./pages/ShowStats";
+import "./styles/global.scss";
 
 function App() {
 	return (
@@ -11,14 +12,15 @@ function App() {
 					path="/"
 					element={<Home />}
 				/>
-				{/* <Route
+				<Route
 					path="/register"
 					element={<RegisterMood />}
 				/>
-				<Route
-					path="/stats"
-					element={<ShowStats />}
-				/> */}
+
+				{/* // <Route
+				// 	path="/stats"
+				// 	element={<ShowStats />}
+				// />  */}
 			</Routes>
 		</Router>
 	);
