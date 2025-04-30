@@ -1,16 +1,26 @@
-import { useState } from "react";
-import "./App.css";
-import MoodList from "./components/MoodList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+// import RegisterMood from "./pages/RegisterMood";
+// import ShowStats from "./pages/ShowStats";
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
-		<>
-			<h1>Moodtracker</h1>
-			<button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-			<MoodList />
-		</>
+		<Router>
+			<Routes>
+				<Route
+					path="/"
+					element={<Home />}
+				/>
+				{/* <Route
+					path="/register"
+					element={<RegisterMood />}
+				/>
+				<Route
+					path="/stats"
+					element={<ShowStats />}
+				/> */}
+			</Routes>
+		</Router>
 	);
 }
 
