@@ -27,7 +27,7 @@ function MoodList() {
 		fetchMoods();
 	}, []);
 
-	if (loading) return <div>🔄 Laster moods...</div>;
+	if (loading) return <div> 🔃 Loading moods ...</div>;
 
 	if (errorMessage) return <div>❌ Error: {errorMessage}</div>;
 
