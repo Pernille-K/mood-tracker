@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import RegisterMood from "./pages/RegisterMood";
+import TagPage from "./pages/register/tags";
+import MoodPage from "./pages/register/mood";
 // import ShowStats from "./pages/ShowStats";
 import "./styles/global.scss";
 
@@ -15,6 +17,14 @@ function App() {
 				<Route
 					path="/register"
 					element={<RegisterMood />}
+				/>
+				<Route
+					path="/register/tags"
+					element={<TagPage />}
+				/>
+				<Route
+					path="/register/mood"
+					element={<MoodPage />}
 				/>
 
 				{/* // <Route
