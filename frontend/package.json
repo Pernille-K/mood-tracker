@@ -13,6 +13,8 @@
 		"frontend": "file:",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
+		"react-router-dom": "^7.5.3",
+		"recharts": "^2.15.3",
 		"vite-plugin-pwa": "^1.0.0"
 	},
 	"devDependencies": {
