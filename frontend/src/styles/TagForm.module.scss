@@ -1,0 +1,45 @@
+@use "../styles/variables" as *;
+
+.tagform_form {
+	margin: 0 auto;
+}
+
+.tagform_label {
+	color: $color-2-secondary;
+	font-size: 1.5rem;
+	padding-right: 0.5rem;
+	font-weight: 600;
+}
+
+.tagform_input {
+	width: 30vw;
+	height: 1.5rem;
+	font-size: 1.1rem;
+	background-color: #eed7ff;
+	color: $color-2-secondary;
+	border-radius: 10px;
+	margin: 0 auto;
+	border: none;
+	font-style: cursive;
+	padding-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+.tagform_btn {
+	padding: 1vh 1vw;
+	margin: 0 auto;
+	background-color: $color-2-secondary;
+	color: $color-2-primary;
+	box-shadow: 3px 3px 5px #2d023742;
+}
+
+.tagform_btn:disabled,
+.tagform_btn:hover {
+	background-color: #eed7ff;
+	color: $color-2-secondary;
+	box-shadow: none;
+}
+.tagform_btn:hover {
+	text-shadow: 2px 2px 3px #38015079;
+	box-shadow: 3px 3px 5px #24003d62;
+}
