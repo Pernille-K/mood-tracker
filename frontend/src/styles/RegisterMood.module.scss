@@ -1,0 +1,50 @@
+@use "../styles/variables" as *;
+
+.register_container {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+}
+
+.register_h1 {
+	color: $color-2-secondary;
+	text-shadow: 2px 2px 3px #10021bbf;
+}
+
+.register_h2 {
+	color: $color-2-secondary;
+	text-shadow: 1px 1px 2px #220c3285;
+}
+
+.register_h3 {
+	font-weight: 300;
+	color: $color-2-secondary;
+}
+
+.register_p {
+	color: $color-2-secondary;
+}
+
+.register_btn {
+	padding: 1vh 2vw;
+	margin-top: 5vh;
+	margin-bottom: 0;
+	background-color: $color-2-secondary;
+	color: $color-2-primary;
+	box-shadow: 2px 2px 3px #1f0334a8;
+	width: max-content;
+}
+
+.register_btn:disabled {
+	background-color: #eed7ff;
+	color: $color-2-secondary;
+	box-shadow: none;
+}
+
+.register_btn:hover {
+	background-color: #eed7ff;
+	color: $color-2-secondary;
+	box-shadow: 2px 2px 3px #430a6b86;
+}
