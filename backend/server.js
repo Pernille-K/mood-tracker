@@ -51,12 +51,21 @@ app.get("/api/moods", (req, res) => {
 	});
 });
 
+// GET-route to retrieve last 6 moods
+app.get("/api/last-moods", (req, res) => {
+	db.all("SELECT * FROM moods LIMIT 6", [], (err, rows) => {
+		if (err) {
+			return res.status(500).json({ error: "Failed to retrieve last moods" });
+		}
+		res.status(200).json(rows); // Send all moods back as a JSON-response
+	});
+});
+
 // POST-route to save tag
 app.post("/api/tags", (req, res) => {
 	const { tag } = req.body;
 
 	console.log("Received tag:", tag);
-
 
 	if (!tag) {
 		return res.status(400).json({ error: "Tag is required" });
@@ -88,6 +97,16 @@ app.get("/api/tags", (req, res) => {
 	db.all("SELECT * FROM tags", [], (err, rows) => {
 		if (err) {
 			return res.status(500).json({ error: "Failed to retrieve tags" });
+		}
+		res.status(200).json(rows); // Send all moods back as a JSON-response
+	});
+});
+
+// GET-route to retrieve last 6 tags
+app.get("/api/last-tags", (req, res) => {
+	db.all("SELECT * FROM tags LIMIT 6", [], (err, rows) => {
+		if (err) {
+			return res.status(500).json({ error: "Failed to retrieve last tags" });
 		}
 		res.status(200).json(rows); // Send all moods back as a JSON-response
 	});
