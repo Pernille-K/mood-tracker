@@ -21,19 +21,29 @@ app.post("/api/moods", (req, res) => {
 		return res.status(400).json({ error: "Mood is required" });
 	}
 
-	db.run("INSERT INTO moods (mood) VALUES (?)", [mood], function (err) {
+	db.all("SELECT * FROM moods where mood = ?", [mood], (err, rows) => {
 		if (err) {
-			console.error(err.message);
-			return res.status(500).json({ error: "Failed to save mood" });
+			return res.status(500).json({ error: "Failed to check existing mood" });
 		}
 
-		res.status(201).json({ message: "Mood saved!", id: this.lastID });
+		if (rows.length > 0) {
+			return res.status(200).json({ message: "Mood already exists", id: rows[0].id });
+		}
+
+		db.run("INSERT INTO moods (mood) VALUES (?)", [mood], function (err) {
+			if (err) {
+				console.error(err.message);
+				return res.status(500).json({ error: "Failed to save mood" });
+			}
+
+			res.status(201).json({ message: "Mood saved!", id: this.lastID });
+		});
 	});
 });
 
 // GET-route to retrieve all moods
 app.get("/api/moods", (req, res) => {
-	db.all("SELECT * FROM moods ORDER BY created_at DESC", [], (err, rows) => {
+	db.all("SELECT * FROM moods", [], (err, rows) => {
 		if (err) {
 			return res.status(500).json({ error: "Failed to retrieve moods" });
 		}
@@ -45,17 +55,31 @@ app.get("/api/moods", (req, res) => {
 app.post("/api/tags", (req, res) => {
 	const { tag } = req.body;
 
+	console.log("Received tag:", tag);
+
+
 	if (!tag) {
 		return res.status(400).json({ error: "Tag is required" });
 	}
 
-	db.run("INSERT INTO tags (tag) VALUES (?)", [tag], function (err) {
+	db.all("SELECT * FROM tags where tag = ?", [tag], (err, rows) => {
 		if (err) {
-			console.error(err.message);
-			return res.status(500).json({ error: "Failed to save tag" });
+			console.error("Error checking existing tag:", err.message);
+			return res.status(500).json({ error: "Failed to check existing tag" });
 		}
 
-		res.status(201).json({ message: "Tag saved!", id: this.lastID });
+		if (rows.length > 0) {
+			return res.status(200).json({ message: "Tag already exists", id: rows[0].id });
+		}
+
+		db.run("INSERT INTO tags (tag) VALUES (?)", [tag], function (err) {
+			if (err) {
+				console.error("Error saving tag:", err.message);
+				return res.status(500).json({ error: "Failed to save tag" });
+			}
+
+			res.status(201).json({ message: "Tag saved!", id: this.lastID });
+		});
 	});
 });
 
@@ -84,51 +108,53 @@ app.post("/api/mood_tags", (req, res) => {
 				return res.status(500).json({ error: "Failed to get mood" });
 			}
 
-			let moodId;
+			const insertMood = (moodId) => {
+				db.get("SELECT id FROM tags WHERE tag = ?", [tag], function (err, tagRow) {
+					if (err) {
+						console.error(err.message);
+						return res.status(500).json({ error: "Failed to get tag" });
+					}
+
+					const insertTag = (tagId) => {
+						db.run(
+							"INSERT OR IGNORE INTO mood_tags (mood_id, tag_id) VALUES (?, ?)",
+							[moodId, tagId],
+							function (err) {
+								if (err) {
+									console.error(err.message);
+									return res.status(500).json({ error: "Failed to link mood and tag" });
+								}
+
+								res.status(201).json({ message: "Mood and tag saved & linked!", moodId, tagId });
+							}
+						);
+					};
+
+					if (tagRow) {
+						insertTag(tagRow.id);
+					} else {
+						db.run("INSERT INTO tags (tag) VALUES (?)", [tag], function (err) {
+							if (err) {
+								console.error(err.message);
+								return res.status(500).json({ error: "Failed to insert tag" });
+							}
+							insertTag(this.lastID);
+						});
+					}
+				});
+			};
+
 			if (moodRow) {
-				moodId = moodRow.id;
+				insertMood(moodRow.id);
 			} else {
 				db.run("INSERT INTO moods (mood) VALUES (?)", [mood], function (err) {
 					if (err) {
 						console.error(err.message);
 						return res.status(500).json({ error: "Failed to insert mood" });
 					}
-					moodId = this.lastID;
+					insertMood(this.lastID);
 				});
 			}
-
-			db.get("SELECT id FROM tags WHERE tag = ?", [tag], function (err, tagRow) {
-				if (err) {
-					console.error(err.message);
-					return res.status(500).json({ error: "Failed to get tag" });
-				}
-
-				let tagId;
-				if (tagRow) {
-					tagId = tagRow.id;
-				} else {
-					db.run("INSERT INTO tags (tag) VALUES (?)", [tag], function (err) {
-						if (err) {
-							console.error(err.message);
-							return res.status(500).json({ error: "Failed to insert tag" });
-						}
-						tagId = this.lastID;
-					});
-				}
-
-				db.run(
-					"INSERT OR IGNORE INTO mood_tags (mood_id, tag_id) VALUES (?, ?)",
-					[moodId, tagId],
-					function (err) {
-						if (err) {
-							console.error(err.message);
-							return res.status(500).json({ error: "Failed to link mood and tag" });
-						}
-
-						res.status(201).json({ message: "Mood and tag saved & linked!", moodId, tagId });
-					}
-				);
-			});
 		});
 	});
 });
