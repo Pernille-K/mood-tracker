@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import RegisterMood from "./pages/RegisterMood";
 import TagPage from "./pages/register/tags";
 import MoodPage from "./pages/register/mood";
+import TagsByMoodPage from "./pages/stats/tagsByMood";
 // import ShowStats from "./pages/ShowStats";
 import "./styles/global.scss";
 
@@ -25,6 +26,10 @@ function App() {
 				<Route
 					path="/register/mood"
 					element={<MoodPage />}
+				/>
+				<Route
+					path="stats/tags_by_mood"
+					element={<TagsByMoodPage />}
 				/>
 
 				{/* // <Route

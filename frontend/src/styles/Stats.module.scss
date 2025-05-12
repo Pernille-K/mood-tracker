@@ -1,0 +1,170 @@
+@use "../styles/variables" as *;
+
+//MoodDropdown.tsx
+div {
+	color: #2b2b2b;
+	color: $color-icon-secondary;
+}
+
+.stats_h3 {
+	font-weight: 300;
+	margin-bottom: 4vh;
+}
+
+.stats_dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.stats_dropbtn {
+	cursor: pointer;
+	color: $color-icon;
+	font-weight: 800;
+}
+
+.stats_dropdown_content {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	background-color: $color-3-primary;
+	padding: 0 3vw;
+	border-radius: 10px;
+	z-index: 1;
+	font-weight: 800;
+	box-shadow: 3px 3px 5px #2d023742;
+
+	display: grid;
+	justify-content: center;
+	width: 9rem;
+
+	&.multi_column {
+		grid-template-columns: repeat(2, 1fr);
+		width: 60vw;
+	}
+}
+
+.stats_dropdown_content a {
+	font-size: 1.3rem;
+	color: $color-icon-secondary;
+	text-decoration: none;
+	cursor: pointer;
+	font-weight: 300;
+	padding: 0 1rem;
+}
+
+.stats_dropdown_content a:hover {
+	color: $color-icon;
+	font-weight: 800;
+}
+
+.stats_btn {
+	margin: 0;
+	background-color: $color-icon;
+	color: $color-icon-secondary;
+	box-shadow: 3px 3px 5px #2d023742;
+	text-shadow: 2px 2px 3px #a9821fa0;
+	font-weight: 800;
+	display: inline-block;
+	border-radius: 15px;
+	border: none;
+	width: fit-content;
+	min-width: 12rem;
+	padding: 2vh 1vw;
+	font-size: 1rem;
+	text-wrap: nowrap;
+}
+
+.stats_btn:hover {
+	background-color: $color-1-secondary;
+	color: $color-icon;
+	text-shadow: 2px 2px 3px #370221;
+	box-shadow: 3px 3px 5px #827148;
+}
+
+.stats_label {
+	font-size: 1rem;
+	font-weight: 600;
+	display: list-item;
+	list-style-position: inside;
+}
+
+// Usikker på
+
+.stats_container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	width: 100vw;
+	background-color: #fff4d4;
+	padding: 2vh 2vw; // Litt innvendig padding for trygg layout
+	box-sizing: border-box;
+}
+
+.stats_responsive_container_wrapper {
+	width: 100%;
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+.stats_footer {
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+	gap: 5vw;
+	margin-top: auto;
+	margin-bottom: 2vh;
+	justify-content: center;
+
+	@media (max-width: 500px) {
+		flex-direction: column;
+		gap: 2vh;
+	}
+}
+
+// TagsChart.tsx
+
+.stats_chart_wrapper {
+	margin: 0 auto;
+	flex: 0 1 auto;
+	display: grid;
+	grid-template-rows: repeat(2, 1fr);
+	justify-content: center;
+	place-items: center;
+	align-content: center;
+	max-height: 50vh;
+
+	@media (max-width: 350px) {
+		display: flex;
+		flex-direction: column;
+		place-items: center;
+		align-items: center;
+		width: 90%;
+		max-height: none;
+	}
+}
+
+.stats_labels_wrapper {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	border: 2px solid #ffde91;
+	background-color: #fff0cb;
+	border-radius: 15px;
+	padding: 1vh 3vw;
+	gap: 0.5rem;
+	// margin-top: 5vh;
+
+	&.single {
+		grid-template-columns: (1fr);
+	}
+
+	&.multi_column {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	@media (max-width: 350px) {
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+}
