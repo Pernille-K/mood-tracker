@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 // POST-route to save mood
 app.post("/api/moods", (req, res) => {
-	const { mood } = req.body;
+	const { mood } = req.body.toLowerCase();
 
 	if (!mood) {
 		return res.status(400).json({ error: "Mood is required" });
@@ -63,7 +63,7 @@ app.get("/api/last-moods", (req, res) => {
 
 // POST-route to save tag
 app.post("/api/tags", (req, res) => {
-	const { tag } = req.body;
+	const { tag } = req.body.toLowerCase();
 
 	console.log("Received tag:", tag);
 
@@ -114,7 +114,7 @@ app.get("/api/last-tags", (req, res) => {
 
 // POST-route to save mood and tag together
 app.post("/api/mood_tags", (req, res) => {
-	const { mood, tag } = req.body;
+	const { mood, tag } = req.body.toLowerCase();
 
 	if (!mood || !tag) {
 		return res.status(400).json({ error: "Mood and tag are required" });
