@@ -13,7 +13,7 @@ export function useMoodTags() {
 				setLoading(false);
 			})
 			.catch((err) => {
-				console.error("Wrong with fetching mood_tags:", err);
+				console.error("Error with fetching mood_tags:", err);
 				setLoading(false);
 			});
 	}, []);
