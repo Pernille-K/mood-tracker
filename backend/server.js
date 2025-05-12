@@ -198,6 +198,33 @@ app.get("/api/mood_tags", (req, res) => {
 	});
 });
 
+// GET-route to fetch all tags related to a mood
+app.get("/api/stats/tags_by_mood", (req, res) => {
+	const { mood } = req.query;
+
+	if (!mood) {
+		return res.status(400).json({ error: "Mood is required" });
+	}
+
+	const sql = `
+		SELECT tags.tag, mood_tags.created_at
+		FROM mood_tags
+		JOIN moods ON mood_tags.mood_id = moods.id
+		JOIN tags ON mood_tags.tag_id = tags.id
+		WHERE moods.mood = ?
+		ORDER BY mood_tags.created_at DESC
+	`;
+
+	db.all(sql, [mood], (err, rows) => {
+		if (err) {
+			console.error("Error: ", err);
+			return res.status(500).json({ error: "Failed to get tags" });
+		}
+
+		res.status(200).json(rows);
+	});
+});
+
 app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}`);
 });
